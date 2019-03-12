@@ -12,3 +12,19 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
+void MainWindow::on_btn_num9_clicked()
+{
+
+   printf("hello\n");
+}
+
+void MainWindow::on_btn_num0_clicked()
+{
+   printf("hello\n");
+}

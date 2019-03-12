@@ -16,7 +16,7 @@ find_package(Qt5Widgets CONFIG REQUIRED)
 set(helloworld_SRCS
     mainwindow.ui
     mainwindow.cpp
-    main2.cpp
+    main.cpp
 )
 # Tell CMake to create the helloworld executable
 add_executable(helloworld WIN32 ${helloworld_SRCS})
