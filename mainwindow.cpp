@@ -1,48 +1,66 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+int test = 0;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    test = 3;
     ui->setupUi(this);
     connect(ui->btn_num9, &QPushButton::clicked, this, &MainWindow::on_pushButton_clicked);
     // connect(ui->MainWindow, &QEvent::KeyPress, this, &MainWindow::keyPressEvent2);
 
 }
 void MainWindow::keyPressEvent(QKeyEvent *event) {
-    if( event->key() == Qt::Key_0 ) {
-        m_currentNumber += "0";
+    if(isOperator(event->key())) {
+        if(m_op == PLUS) {
+            m_acc += std::stod(m_currentNumber);
+        }
+        if(m_op == MINUS) {
+            m_acc -= std::stod(m_currentNumber);
+        }
+        if(m_op == MULT) {
+            m_acc *= std::stod(m_currentNumber);
+        }
+        if(m_op == DIV) {
+            m_acc /= std::stod(m_currentNumber);
+        }
+        if( event->key() == Qt::Key_Plus) {
+            m_op = PLUS;
+        }
+        if( event->key() == Qt::Key_Minus) {
+            m_op = MINUS;
+        }
+        if( event->key() == Qt::Key_Asterisk) {
+            m_op = MULT;
+        }
+        if( event->key() == Qt::Key_Slash) {
+            m_op = DIV;
+        }
+        if( event->key() == Qt::Key_Return) {
+            m_op = RETURN;
+        }
+        std::string t = std::to_string(m_acc);
+        ui->textEdit->setText(t.c_str());
+        m_currentNumber = "";
     }
-    if( event->key() == Qt::Key_1 ) {
-        m_currentNumber += "1";
+    else if(toNumber(event->key())) {
+        if(m_op == RETURN) {
+            m_acc = 0.0;
+            m_currentNumber = "";
+            m_op = PLUS;
+        }
+        char t = toNumber(event->key());
+        m_currentNumber += t;
+        ui->textEdit->setText(m_currentNumber.c_str());
     }
-    if( event->key() == Qt::Key_2 ) {
-        m_currentNumber += "2";
+    else if(event->key() == Qt::Key_Escape) {
+        m_acc = 0.0;
+        m_currentNumber = "";
+        m_op = PLUS;
+        ui->textEdit->setText(m_currentNumber.c_str());
     }
-    if( event->key() == Qt::Key_3 ) {
-        m_currentNumber += "3";
-    }
-    if( event->key() == Qt::Key_4 ) {
-        m_currentNumber += "4";
-    }
-    if( event->key() == Qt::Key_5 ) {
-        m_currentNumber += "5";
-    }
-    if( event->key() == Qt::Key_6 ) {
-        m_currentNumber += "6";
-    }
-    if( event->key() == Qt::Key_7 ) {
-        m_currentNumber += "7";
-    }
-    if( event->key() == Qt::Key_8 ) {
-        m_currentNumber += "8";
-    }
-    if( event->key() == Qt::Key_9 ) {
-        m_currentNumber += "9";
-        // ui->textEdit->setText(ui->textEdit->toPlainText() + "9");
-    }
-    ui->textEdit->setText(m_currentNumber.c_str());
 }
 
 MainWindow::~MainWindow()
