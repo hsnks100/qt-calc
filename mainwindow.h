@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <string>
+#include <QMessageBox>
 
 namespace Ui {
     class MainWindow;
@@ -19,7 +20,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
     void on_btn_num9_clicked();
     void on_btn_num0_clicked();
     void on_btn_num1_clicked();
@@ -67,6 +67,12 @@ protected:
         return 0;
     }
     void keyPressEvent(QKeyEvent *event);
+    void warningAlert() {
+        QMessageBox msgBox;
+        msgBox.setText("Name");
+        msgBox.setInformativeText("only keyboard");
+        int ret = msgBox.exec();
+    }
 private:
     Ui::MainWindow *ui;
     std::string m_currentNumber;

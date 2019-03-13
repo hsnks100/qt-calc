@@ -8,12 +8,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     test = 3;
     ui->setupUi(this);
-    connect(ui->btn_num9, &QPushButton::clicked, this, &MainWindow::on_pushButton_clicked);
+    // connect(ui->btn_num9, &QPushButton::clicked, this, &MainWindow::on_pushButton_clicked);
     // connect(ui->MainWindow, &QEvent::KeyPress, this, &MainWindow::keyPressEvent2);
 
 }
 void MainWindow::keyPressEvent(QKeyEvent *event) {
     if(isOperator(event->key())) {
+        if(m_currentNumber == "") {
+            m_currentNumber = "0";
+        }
         if(m_op == PLUS) {
             m_acc += std::stod(m_currentNumber);
         }
@@ -68,11 +71,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    printf("%s...\n", __FUNCTION__);
-
-}
 
 void MainWindow::on_btn_num9_clicked()
 {
@@ -82,45 +80,57 @@ void MainWindow::on_btn_num9_clicked()
 
 void MainWindow::on_btn_num0_clicked()
 {
-   printf("hello\n");
+    warningAlert();
 }
+
 
 void MainWindow::on_btn_num1_clicked()
 {
+    QMessageBox msgBox;
+    msgBox.setText("Name");
+    msgBox.setInformativeText("only keyboard");
+    int ret = msgBox.exec();
 
 }
 
 void MainWindow::on_btn_num2_clicked()
 {
+    warningAlert();
 
 }
 
 void MainWindow::on_btn_num3_clicked()
 {
+    warningAlert();
 
 }
 
 void MainWindow::on_btn_num6_clicked()
 {
+    warningAlert();
 
 }
 
 void MainWindow::on_btn_num5_clicked()
 {
+    warningAlert();
 
 }
 
 void MainWindow::on_btn_num4_clicked()
 {
+    warningAlert();
 
 }
 
 void MainWindow::on_btn_num7_clicked()
 {
 
+    warningAlert();
 }
 
 void MainWindow::on_btn_num8_clicked()
 {
+    warningAlert();
 
 }
